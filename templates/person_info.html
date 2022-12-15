@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{{ person.familiya }} {{ person.ism }} {{ person.otasining_ismi }}</h4>
+                  <div class="table-responsive pt-3">
+                    <table class="table table-bordered">
+
+                      <tbody>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            F.I.SH
+                          </td>
+                          <td>
+                            {{ person.familiya }} {{ person.ism }} {{ person.otasining_ismi }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Passport
+                          </td>
+                          <td>
+                            {{ person.passport_seriya }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Tuman
+                          </td>
+                          <td>
+                            {{ person.tuman }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Manzil
+                          </td>
+                          <td>
+                            {{ person.hozirgi_yashash_manzili }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Kimga murojaat qilgan
+                          </td>
+                          <td>
+                            {{ person.kimga_murojaat_qilgan }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Ijtimoiy himoya
+                          </td>
+                          <td>
+                            {{ person.ijtimoiy_himoya }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Nogironligi
+                          </td>
+                          <td>
+                            {% if person.nogironligi == 'Bor' or person.nogironligi == 'bor' %}
+                                {{ person.nogironlik_raqami }} - guruh
+                            {% else %}
+                                {{ person.nogironligi|title }}
+                            {% endif %}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Homiy
+                          </td>
+                          <td>
+                            {{ person.mablag_ajratgan_tashkilot }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Summa
+                          </td>
+                          <td>
+                            {{ person.summa }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Sana/vaqt
+                          </td>
+                          <td>
+                            {{ person.created }}
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td style="font-weight: bold;">
+                            Tavsif
+                          </td>
+                          <td>
+                            {{ person.tavsif }}
+                          </td>
+
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-people mt-auto">
+                    {% if person.photo %}
+                        <img src="{{ person.photo.url }}" alt="Rasm">
+                    {% else %}
+                    <h4 class="card-title">Rasm mavjud emas!</h4>
+                    {% endif %}
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+{% endblock content %}

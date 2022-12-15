@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Ma'lumot kiritish</h4>
+                                    <p class="card-description">
+                                        "Ijtimoiy himoya" ga olingan aholi ma'lumotini kiritish
+                                    </p>
+                                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername2">Ism</label>
+                                            <input type="text" name="ism" class="form-control" id="exampleInputUsername2"
+                                                placeholder="Ism..." required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">Familya</label>
+                                            <input type="text" name="familiya" class="form-control" id="exampleInputUsername1"
+                                                placeholder="Familya..." required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername3">Otasining ismi</label>
+                                            <input type="text" name="otasining_ismi" class="form-control" id="exampleInputUsername3"
+                                                placeholder="Otasining ismi..." required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Pasport seriya raqami</label>
+                                            <input type="text" name="passport_seriya" class="form-control" id="exampleInputPassword1"
+                                                placeholder="Seriya raqami" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelectOpt1">Doimiy yashash manzili</label>
+                                            <!-- <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Yashash manzili"> -->
+                                            <select name="tuman" class="form-control" id="exampleFormControlSelectOpt1" required>
+                                                <option name="tanlang" selected>Tumanni tanlang</option>
+                                                {% for tuman in tumanlar %}
+                                                <option name="{{tuman.name}}">{{tuman.name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername4">Hozirgi yashash manzili</label>
+                                            <input type="text" name="doimiy_yashash_manzili" class="form-control" id="exampleInputUsername4"
+                                                placeholder="Hozirgi yashash manzili..." required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputConfirmPassword1">Kimga murojaat qilgan?</label>
+                                            <input type="text" name="kimga_murojaat_qilgan" class="form-control" id="exampleInputConfirmPassword1"
+                                                placeholder="Murojat kimga?" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect2">"Ijtimoiy himoya" mavjudligi</label>
+                                                <div>
+                                                    <select name="ijtimoiy_ximoya" class="form-control" id="exampleFormControlSelectOpt2" required>
+                                                        <option name="tanlang">Yo'q</option>
+                                                        {% for i in turlari %}
+                                                        <option name="{{i.name}}">{{i.name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            <fieldset class="border p-2" name="nogironligi">
+                                                <legend class="w-25 mx-4" id="exampleNogironligia"><small>Nogironligi:</small></legend>
+                                                <input type="radio" id="no-check" name="nogironligi" value="Yo'q" checked>
+                                                <label for="no-check" class="check">Yo'q</label>
+                                                <br>
+
+                                                <input type="radio" id="check" name="nogironligi" value="Bor">
+                                                <label for="check" class="check">Bor</label>
+
+                                                <select name="nogironlik_raqami" class="form-control my-2" id="exampleNogironligi">
+                                                    <option value="0" disabled>Nogironlik guruhini tanlang.</option>
+                                                    <option value="1">I</option>
+                                                    <option value="2">II</option>
+                                                    <option value="3">III</option>
+                                                </select>
+
+                                            </fieldset>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputConfirmMablag1">Mablag' ajratayotgan tashkilot
+                                                nomi.</label>
+                                            <input type="text" name="mablag_ajratgan_tashkilot" class="form-control" id="exampleInputConfirmMablag1"
+                                                placeholder="Tashkilot nomi" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputConfirmSumma1">Qancha summa ajratildi
+                                                (so'm)</label>
+                                            <input type="number" name="summa" class="form-control" id="exampleInputConfirmSumma1"
+                                                placeholder="Qancha summa ajratildi" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="tavsif">Tavsif</label>
+                                            <textarea name="tavsif" class="form-control" id="tavsif"
+                                                      placeholder="Ixtiyoriy..."></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleId">Biriktirilgani fayllarni kiriting</label>
+                                            <input type="file" name="photo" class="file-upload-default" id="exampleId">
+                                            <div class="input-group col-xs-12">
+                                                <input type="file" name="photo" class="form-control file-upload-info" placeholder="Fayllarni kiriting...">
+                                                <span class="input-group-append">
+                                                    <button class="file-upload-browse btn btn-primary"
+                                                        type="button">Kiritish</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <button type="submit"
+                                            class="yubor btn btn-primary mr-2">Saqlash</button>
+                                        <a href="{% url 'home_page' %}" class="btn btn-light">Bekor qilish</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2022.
+                            All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made
+                            with <i class="ti-heart text-danger ml-1"></i></span>
+                    </div>
+                </footer>
+                <!-- partial -->
+            </div>
+{% endblock content %}
+
+{% block script_uchun %}
+    <script src="{% static './js/file-upload.js' %}"></script>
+    <script src="{% static './js/selectOpt.js' %}"></script>
+{% endblock script_uchun %}

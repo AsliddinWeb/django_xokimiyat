@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-panel">
+                <div class="content-wrapper">
+                    <h2>{{ city }}</h2>
+                    <div class="row">
+                      <div class="col-md-12 grid-margin">
+                        <div class="alert alert-success alert-title" role="alert">
+                      <h3>Ma'lumotlar muvaffaqiyatli kiritildi</h3>
+                    </div>
+                    <a class="btn btn-primary home-icon" href="{% url 'home_page' %}" role="button"><i class="mdi mdi-home"></i> Bosh sahifa</a>
+                      </div>
+                    </div>
+                </div>
+</div>
+{% endblock content %}x

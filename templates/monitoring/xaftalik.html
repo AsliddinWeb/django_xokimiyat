@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="main-panel">
+
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+                            <div class="row">
+                                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                                    <h3 class="font-weight-bold">Qashqadaryo viloyati hokimligi "Ijtimoiy himoya"
+                                        monitoring tizimi</h3>
+                                    <!-- <h6 class="font-weight-normal mb-0">Qashqadaryo viloyati "Ijtimoiy ximoya" tizimiga</h6> -->
+                                </div>
+                                <div class="col-12 col-xl-4">
+                                    <div class="justify-content-end d-flex">
+                                        <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                                            <button class="btn btn-sm btn-light bg-white" type="button"
+                                                aria-haspopup="true" aria-expanded="true">
+                                                <i class="mdi mdi-calendar"></i> Bugun ({{ sana }}-Dekabr 2022)
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card position-relative">
+                                <div class="card-body">
+                                    <div id="detailedReports"
+                                        class="carousel slide detailed-report-carousel position-static pt-2"
+                                        data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <div class="row">
+                                                    <div
+                                                        class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                                                        <div class="ml-xl-4 mt-3">
+                                                            <p class="card-title">Xaftalik statistika</p>
+                                                            <h1 class="text-primary" style="font-size:1.8rem;">
+                                                                {{ jami_summa|intcomma }} so'm</h1>
+                                                            <!-- <h3 class="font-weight-500 mb-xl-4 text-primary">North America</h3> -->
+                                                            <p class="mb-2 mb-xl-0">"Ijtimoiy himoya"dagi kishilarga
+                                                                ushbu summa ajratildi.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-xl-9">
+                                                        <div class="row">
+                                                            <div class="col-md-6 border-right">
+                                                                <div class="table-responsive mb-3 mb-md-0 mt-3">
+                                                                    <table class="table table-borderless report-table">
+                                                                        {% if a %}
+                                                                            {% for i in oxirgi_natija %}
+                                                                            <tr>
+                                                                                <td class="text-muted">{{ i.0 }}</td>
+                                                                                <td class="w-100 px-0">
+                                                                                    <div class="progress progress-md mx-4">
+                                                                                        <div class="progress-bar bg-primary"
+                                                                                            role="progressbar"
+                                                                                            style="width: {{i.1 }}0%"
+                                                                                            aria-valuenow="70"
+                                                                                            aria-valuemin="0"
+                                                                                            aria-valuemax="100"></div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <h5 class="font-weight-bold mb-0">{{ i.1 }}</h5>
+                                                                                </td>
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                        {% else %}
+                                                                            <tr>
+                                                                                <td class="text-muted">Hozircha ma'lumotlar yo'q</td>
+                                                                                <td class="w-100 px-0">
+                                                                                    <div class="progress progress-md mx-4">
+                                                                                        <div class="progress-bar bg-primary"
+                                                                                            role="progressbar"
+                                                                                            style="width: 100%"
+                                                                                            aria-valuenow="70"
+                                                                                            aria-valuemin="0"
+                                                                                            aria-valuemax="100"></div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <h5 class="font-weight-bold mb-0">0</h5>
+                                                                                </td>
+                                                                            </tr>
+                                                                        {% endif %}
+
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 mt-3">
+                                                                <div class="card">
+                <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                  <h4 class="card-title">Tumanlar kesimida</h4>
+                  <canvas id="doughnutChart" width="686" height="342" style="display: block; height: 274px; width: 549px;" class="chartjs-render-monitor"></canvas>
+                </div>
+              </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title">Ijtimoiy himoyaga olingan shaxslar ro'yhati</p>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table class="display expandable-table" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>FISH</th>
+                                                            <th>Passport seriya</th>
+                                                            <th>Tuman</th>
+                                                            <th>Summa</th>
+                                                            <th>Sana/vaqt</th>
+                                                            <th>Rasm</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        {% for i in kunlik_monitoringlar %}
+                                                            <tr>
+                                                                <td>{{ forloop.counter }}</td>
+                                                                <td>
+                                                                    <a href="{% url 'person_info_page' pk=i.id %}">
+                                                                        {{ i.ism }} {{ i.familiya }} {{ i.otasining_ismi }}
+                                                                    </a>
+                                                                </td>
+                                                                <td>{{ i.passport_seriya }}</td>
+                                                                <td>{{ i.tuman }}</td>
+                                                                <td>{{ i.summa }}</td>
+                                                                <td>{{ i.created }}</td>
+                                                                    {% if i.photo %}
+                                                                        <td><img src="{{ i.photo.url }}" alt="rasm" width="50"></td>
+                                                                    {% else %}
+                                                                        <td><img src="{% static 'no_image.jpg' %}" alt="rasm" width="50"></td>
+                                                                    {% endif %}
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- content-wrapper ends -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.
+                            All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made
+                            with <i class="ti-heart text-danger ml-1"></i></span>
+                    </div>
+                </footer>
+                <!-- partial -->
+            </div>
+{% endblock content %}
